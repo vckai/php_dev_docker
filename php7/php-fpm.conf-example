@@ -1,0 +1,29 @@
+[global]
+
+error_log = /data/logs/php7_fpmt.log
+
+daemonize = no
+
+[www]
+
+;access.log = /data/logs/php7-fpm.log
+;access.format = "%R - %u %t \"%m %r%Q%q\" %s %f %{mili}d %{kilo}M %C%%"
+
+user = www-data
+group = www-data
+
+listen = [::]:9002
+
+pm = dynamic
+;pm = static
+pm.max_children = 20
+pm.start_servers = 10
+pm.min_spare_servers = 5
+pm.max_spare_servers = 20
+
+clear_env = no
+
+rlimit_files = 1048576
+request_terminate_timeout = 60
+request_slowlog_timeout = 1
+slowlog = /data/logs/php7-slow.log

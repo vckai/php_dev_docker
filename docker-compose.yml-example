@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+    nginx:
+        build: ./nginx
+        ports:
+            - "80:80"
+        links:
+            - "php5"
+            - "php7"
+        volumes:
+            - ~/data/www:/data/www
+            - ~/data/logs:/data/logs
+            - ~/data/data:/data/data
+            - ./nginx/vhosts/:/usr/local/openresty/nginx/conf/vhosts/
+
+    php5:
+        build: ./php5
+        privileged: true
+        expose:
+            - "9000"
+            - "9001"
+        links:
+            - "mysql"
+            - "redis"
+            - "mongo"
+            - "rabbit"
+        ulimits: 
+            core: -1
+        volumes:
+            - ~/data/www:/data/www
+            - ~/data/logs:/data/logs
+            - ~/data/data:/data/data
+
+    php7:
+        build: ./php7
+        privileged: true
+        expose:
+            - "9002"
+        links:
+            - "mysql"
+            - "redis"
+            - "mongo"
+            - "rabbit"
+        ulimits: 
+            core: -1
+        volumes:
+            - ~/data/www:/data/www
+            - ~/data/logs:/data/logs
+            - ~/data/data:/data/data
+
+    mysql:
+        build: ./mysql
+        ports:
+            - "3306:3306"
+        volumes:
+            - ~/data/data/mysql:/data/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: 123
+
+    redis:
+        build: ./redis
+        ports:
+            - "6379:6379"
+
+    mongo:
+        build: ./mongo
+        ports:
+            - "27017:27017"
+
+    rabbit:
+        build: ./rabbit
+        ports:
+            - "5672:5672"
+            - "15672:15672"

@@ -1,0 +1,15 @@
+*.swp
+*.swo
+
+/docker-compose.yml
+/docker-compose-dev.yml
+/.env
+
+/nginx/vhosts/
+/nginx/nginx.conf
+
+/php5/php-fpm.conf
+/php5/php.ini
+
+/php7/php-fpm.conf
+/php7/php.ini
