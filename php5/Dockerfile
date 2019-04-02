@@ -67,7 +67,8 @@ RUN tar xfz /tmp/memcached.tgz \
 
 ADD pkg/composer.phar /usr/local/bin/composer
 RUN chmod +x /usr/local/bin/composer
-RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
+#RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com
+RUN composer config -g repo.packagist composer https://packagist.laravel-china.org
 
 ADD pkg/phpunit-4.8.phar /usr/local/bin/phpunit
 RUN chmod +x /usr/local/bin/phpunit
